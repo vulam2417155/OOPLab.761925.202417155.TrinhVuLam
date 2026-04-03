@@ -7,17 +7,30 @@ public class DigitalVideoDisc {
     private int length;
     private float cost;
 
+    // ✅ Class variable (shared by all objects)
+    private static int nbDigitalVideoDiscs = 0;
+
+    // ✅ Instance variable (unique per object)
+    private int id;
+
     // Constructors
-    public DigitalVideoDisc() {}
+    public DigitalVideoDisc() {
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
+    }
 
     public DigitalVideoDisc(String title) {
         this.title = title;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
     public DigitalVideoDisc(String title, String category, float cost) {
         this.title = title;
         this.category = category;
         this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
     public DigitalVideoDisc(String title, String category, String director, float cost) {
@@ -25,6 +38,8 @@ public class DigitalVideoDisc {
         this.category = category;
         this.director = director;
         this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
@@ -33,18 +48,24 @@ public class DigitalVideoDisc {
         this.director = director;
         this.length = length;
         this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
-    // Getter
+    // Getters
     public String getTitle() {
         return title;
     }
 
-    public float getCost() {   // ✅ FIXED ERROR
+    public float getCost() {
         return cost;
     }
 
-    // TEMPORARY setter for Section 15
+    public int getId() {   // ✅ get ID
+        return id;
+    }
+
+    // TEMP setter (can remove later if not needed)
     public void setTitle(String title) {
         this.title = title;
     }
