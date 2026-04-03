@@ -7,7 +7,9 @@ public class Cart {
     private DigitalVideoDisc[] itemsOrdered = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
 
-    // Add DVD
+    // ========================
+    // Add 1 DVD (original)
+    // ========================
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = disc;
@@ -18,7 +20,26 @@ public class Cart {
         }
     }
 
+    // ========================
+    // Overloading 1: Add 2 DVDs
+    // ========================
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+    }
+
+    // ========================
+    // Overloading 2: Add array
+    // ========================
+    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+        for (DigitalVideoDisc disc : dvdList) {
+            addDigitalVideoDisc(disc);
+        }
+    }
+
+    // ========================
     // Remove DVD
+    // ========================
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         boolean found = false;
 
@@ -43,7 +64,9 @@ public class Cart {
         }
     }
 
+    // ========================
     // Total cost
+    // ========================
     public float totalCost() {
         float total = 0;
 
@@ -54,7 +77,9 @@ public class Cart {
         return total;
     }
 
+    // ========================
     // Display cart
+    // ========================
     public void displayCart() {
         System.out.println("******** CART ********");
 
