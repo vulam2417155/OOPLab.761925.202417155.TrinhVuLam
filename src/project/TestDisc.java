@@ -1,5 +1,7 @@
 package project;
 
+import project.hust.soict.dsai.aims.disc.DigitalVideoDisc;
+
 public class TestDisc {
     public static void main(String[] args) {
         DigitalVideoDisc d1 = new DigitalVideoDisc("A");
