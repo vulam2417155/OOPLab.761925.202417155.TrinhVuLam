@@ -1,0 +1,95 @@
+SECTION 14: Constructors of Whole Classes and Parent Classes
+
+Which classes are aggregates of other classes?
+
+Looking at our code, three classes contain other objects inside them:
+- CompactDisc contains a list of Track objects
+- Cart contains a list of Media objects
+- Store also contains a list of Media objects
+
+Do their constructors initialize their parts?
+
+Yes they do. When you create a new CompactDisc, Cart, or Store, the ArrayList
+inside each of them is automatically created as an empty list. So you can
+immediately start adding things to them without getting a NullPointerException.
+
+SECTION 15: Unique Item in a List
+
+Why do we need to override equals()?
+
+By default Java's equals() just checks if two variables point to the exact same
+object in memory. But that's not always what we want. For example, if I create
+two separate DVD objects both called "The Lion King", Java would say they're
+different even though they represent the same movie. By overriding equals() we
+can tell Java to compare by title instead.
+
+What happens if the passed object is not an instance of Media or Track?
+
+The instanceof check will return false and the method immediately returns false
+too. This is important because without it, the code would crash with a
+ClassCastException when trying to cast the wrong type of object.
+
+SECTION 16: Polymorphism with toString()
+
+What happens when we call toString() on a list of Media?
+
+Even though we declared everything as type Media, Java is smart enough to call
+the right toString() for each object at runtime. So when it hits a DVD in the
+list, it calls DVD's toString(). When it hits a CD, it calls CD's toString(),
+and so on. This is called runtime polymorphism or dynamic dispatch.
+
+What are the advantages of Polymorphism?
+
+- Code reusability: you can write one method that works for many different types
+- Flexibility: you can add new media types later without changing existing code
+- Cleaner code: you can treat DVDs, CDs and Books all through the same Media type
+- Easier maintenance: changes in one class don't break everything else
+
+How is Inheritance useful to achieve Polymorphism in Java?
+
+Inheritance is what makes polymorphism possible. Because DVD, CD and Book all
+extend Media, we can store them all in the same ArrayList<Media>. And because
+each of them overrides toString() in their own way, Java knows which version to
+call at runtime even when the variable is declared as Media. Without inheritance
+there would be no common parent type to refer to them all through.
+
+What are the differences between Polymorphism and Inheritance in Java?
+
+Inheritance is about structure - it's how DVD gets access to the fields and
+methods of Media without rewriting them. Polymorphism is about behavior - it's
+how the same method call like toString() or play() does different things
+depending on the actual type of object. In short, inheritance sets up the
+relationship between classes, and polymorphism takes advantage of that
+relationship to make code more flexible.
+
+SECTION 17: Sort Media in the Cart
+
+What class should implement the Comparable interface?
+
+The Media class should implement Comparable<Media> since all media types extend
+it. This way the sorting logic applies to DVDs, CDs and Books all at once.
+
+How should you implement compareTo() to reflect the ordering?
+
+For sort by title then cost:
+- First compare the titles alphabetically
+- If titles are the same, compare by cost (lower cost comes first)
+
+For sort by cost then title:
+- First compare by cost (lower cost comes first)
+- If costs are the same, compare titles alphabetically
+
+Can we have two ordering rules using Comparable?
+
+No. Comparable only allows one default ordering per class. If we need two
+different sorting rules like by title and by cost, we have to use Comparator
+instead since we can create as many Comparator classes as we need.
+
+Suppose DVDs have a different ordering rule from other media types
+(by title, then decreasing length, then cost). How would you modify your code?
+
+We would override compareTo() inside the DigitalVideoDisc class specifically.
+Since DigitalVideoDisc extends Media, it can override the compareTo() method
+with its own version that first sorts by title, then by length in decreasing
+order, then by cost. Other media types would still use Media's compareTo()
+while DVDs would use their own version.
