@@ -1,19 +1,17 @@
-package project.hust.soict.dsai.aims;
+package project.hust.soict.dsai.test.store;
 
-import project.hust.soict.dsai.aims.cart.Cart;
 import project.hust.soict.dsai.aims.store.Store;
 import project.hust.soict.dsai.aims.disc.DigitalVideoDisc;
 import project.hust.soict.dsai.aims.media.CompactDisc;
 import project.hust.soict.dsai.aims.media.Track;
 import project.hust.soict.dsai.aims.media.Book;
 
-public class Aims {
-
+public class StoreTest {
     public static void main(String[] args) {
 
-        // ===== STORE SECTION =====
         Store store = new Store();
 
+        // Create different media types
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
                 "Animation", "Roger Allers", 87, 19.95f);
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
@@ -29,45 +27,31 @@ public class Aims {
         Book book = new Book("Clean Code", "Programming", 35.99f);
         book.addAuthor("Robert Martin");
 
-        // Add media to store
+        // Add all media to store
+        System.out.println("--- Adding media to store ---");
         store.addMedia(dvd1);
         store.addMedia(dvd2);
         store.addMedia(cd);
         store.addMedia(book);
 
         // Print store
-        System.out.println("--- Store ---");
+        System.out.println("\n--- Store contents ---");
         store.print();
 
-        // ===== CART SECTION =====
-        Cart anOrder = new Cart();
-
-        // Add media to cart
-        anOrder.addMedia(dvd1);
-        anOrder.addMedia(dvd2);
-        anOrder.addMedia(cd);
-        anOrder.addMedia(book);
-
-        // Print cart
-        System.out.println("\n--- Cart ---");
-        anOrder.print();
-
-        // Search
+        // Test search by title
         System.out.println("\n--- Search by title: lion ---");
-        anOrder.searchByTitle("lion");
+        store.searchByTitle("lion");
 
-        // Remove media
-        anOrder.removeMedia(dvd2);
+        // Test adding duplicate
+        System.out.println("\n--- Adding duplicate ---");
+        store.addMedia(dvd1);
 
-        // Print cart after removal
-        System.out.println("\n--- Cart after removal ---");
-        anOrder.print();
+        // Remove a media
+        System.out.println("\n--- Removing Star Wars ---");
+        store.removeMedia(dvd2);
 
-        // ===== PLAY SECTION =====
-        System.out.println("\n--- Play DVD ---");
-        dvd1.play();
-
-        System.out.println("\n--- Play CD ---");
-        cd.play();
+        // Print store after removal
+        System.out.println("\n--- Store after removal ---");
+        store.print();
     }
 }
